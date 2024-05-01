@@ -15,7 +15,7 @@ interface AuthorRepository {
      *
      * @return ID
      */
-    fun create(
+    suspend fun create(
         name: String,
         birthday: LocalDate?,
     ): Int
@@ -28,7 +28,7 @@ interface AuthorRepository {
      *
      * @return 更新件数
      */
-    fun update(
+    suspend fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
@@ -40,12 +40,12 @@ interface AuthorRepository {
      * @param id ID
      * @return 著者
      */
-    fun findById(id: Int): Author?
+    suspend fun findById(id: Int): Author?
 
     /**
      * 著者IDの存在チェック
      *
      * @param id ID
      */
-    fun existsById(id: Int): Boolean
+    suspend fun existsById(id: Int): Boolean
 }

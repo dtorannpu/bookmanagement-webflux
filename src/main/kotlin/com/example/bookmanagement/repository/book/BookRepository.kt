@@ -15,7 +15,7 @@ interface BookRepository {
      *
      * @return ID
      */
-    fun create(
+    suspend fun create(
         isbn: String?,
         authorId: Int,
         title: String,
@@ -31,7 +31,7 @@ interface BookRepository {
      *
      * @return 更新件数
      */
-    fun update(
+    suspend fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
@@ -47,7 +47,7 @@ interface BookRepository {
      *
      * @return 書籍リスト
      */
-    fun search(
+    suspend fun search(
         title: String?,
         authorName: String?,
         isbn: String?,

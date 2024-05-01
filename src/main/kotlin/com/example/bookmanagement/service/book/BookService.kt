@@ -15,7 +15,7 @@ interface BookService {
      *
      * @return 登録に成功した場合ID
      */
-    fun create(
+    suspend fun create(
         isbn: String?,
         authorId: Int,
         title: String,
@@ -31,7 +31,7 @@ interface BookService {
      *
      * @return 更新に成功した場合ID
      */
-    fun update(
+    suspend fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
@@ -47,7 +47,7 @@ interface BookService {
      *
      * @return 書籍リスト
      */
-    fun search(
+    suspend fun search(
         title: String?,
         authorName: String?,
         isbn: String?,

@@ -15,7 +15,7 @@ interface AuthorService {
      *
      * @return ID
      */
-    fun create(
+    suspend fun create(
         name: String,
         birthday: LocalDate?,
     ): Int
@@ -29,7 +29,7 @@ interface AuthorService {
      *
      * @return 更新に成功した場合ID
      */
-    fun update(
+    suspend fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
@@ -41,5 +41,5 @@ interface AuthorService {
      * @param id ID
      * @return 著者
      */
-    fun findById(id: Int): Author?
+    suspend fun findById(id: Int): Author?
 }

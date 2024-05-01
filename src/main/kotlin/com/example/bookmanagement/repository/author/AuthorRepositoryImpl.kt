@@ -3,6 +3,8 @@ package com.example.bookmanagement.repository.author
 import com.example.bookmanagement.db.jooq.gen.tables.references.AUTHOR
 import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.model.AuthorBook
+import kotlinx.coroutines.reactive.awaitFirstOrNull
+import kotlinx.coroutines.reactive.awaitSingle
 import org.jooq.DSLContext
 import org.jooq.impl.DSL.multiset
 import org.jooq.impl.DSL.select
@@ -14,7 +16,7 @@ import java.time.LocalDate
  */
 @Repository
 class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
-    override fun create(
+    override suspend fun create(
         name: String,
         birthday: LocalDate?,
     ): Int {
@@ -26,7 +28,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
         return author.id!!
     }
 
-    override fun update(
+    override suspend fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
@@ -38,7 +40,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
             .execute()
     }
 
-    override fun findById(id: Int): Author? {
+    override suspend fun findById(id: Int): Author? {
         return create.select(
             AUTHOR.ID,
             AUTHOR.NAME,
@@ -58,7 +60,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
                 },
         ).from(AUTHOR)
             .where(AUTHOR.ID.eq(id))
-            .fetchOne()?.let {
+            .awaitFirstOrNull()?.let {
                 Author(
                     id = it[AUTHOR.ID]!!,
                     name = it[AUTHOR.NAME]!!,
@@ -68,12 +70,12 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
             }
     }
 
-    override fun existsById(id: Int): Boolean {
+    override suspend fun existsById(id: Int): Boolean {
         val count =
             create.selectCount()
                 .from(AUTHOR)
                 .where(AUTHOR.ID.eq(id))
-                .fetchOne(0, Int::class.java)
+                .awaitSingle()[0]
         return count == 1
     }
 }

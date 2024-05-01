@@ -3,17 +3,19 @@ package com.example.bookmanagement.repository.book
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
 import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.model.BookAuthor
+import kotlinx.coroutines.reactive.awaitSingle
 import org.jooq.DSLContext
 import org.jooq.Operator
 import org.jooq.impl.DSL.row
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
 
 /**
  * 書籍リポジトリ実装
  */
 @Repository
 class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
-    override fun create(
+    override suspend fun create(
         isbn: String?,
         authorId: Int,
         title: String,
@@ -27,7 +29,7 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         return book.id!!
     }
 
-    override fun update(
+    override suspend fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
@@ -38,10 +40,10 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
             .set(BOOK.AUTHOR_ID, authorId)
             .set(BOOK.TITLE, title)
             .where(BOOK.ID.eq(id))
-            .execute()
+            .awaitSingle()
     }
 
-    override fun search(
+    override suspend fun search(
         title: String?,
         authorName: String?,
         isbn: String?,
@@ -71,13 +73,13 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
             query.addConditions(Operator.AND, BOOK.author().NAME.like("%$authorName%"))
         }
 
-        return query.fetch {
+        return Flux.from(query).map {
             Book(
                 id = it[BOOK.ID]!!,
                 isbn = it[BOOK.ISBN],
                 title = it[BOOK.TITLE]!!,
                 author = it.value4(),
             )
-        }
+        }.collectList().awaitSingle()
     }
 }

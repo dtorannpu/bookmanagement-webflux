@@ -6,6 +6,7 @@ import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.model.BookAuthor
 import com.example.bookmanagement.service.book.BookService
 import com.fasterxml.jackson.databind.ObjectMapper
+import kotlinx.coroutines.test.runTest
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -33,119 +34,124 @@ class BookApiControllerTest {
     private lateinit var bookService: BookService
 
     @Test
-    fun createBook() {
-        `when`(bookService.create(any(), any(), any())).thenReturn(1)
+    fun createBook() =
+        runTest {
+            `when`(bookService.create(any(), any(), any())).thenReturn(1)
 
-        val request = CreateBookRequest(2, "こころ", "1234567890")
-        val json = mapper.writeValueAsString(request)
+            val request = CreateBookRequest(2, "こころ", "1234567890")
+            val json = mapper.writeValueAsString(request)
 
-        mockMvc.post("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { json("""{ "id" : 1 }""") }
-        }
-
-        verify(bookService, times(1)).create("1234567890", 2, "こころ")
-    }
-
-    @Test
-    fun createBookNoAuthor() {
-        `when`(bookService.create(any(), any(), any())).thenReturn(null)
-
-        val request = CreateBookRequest(2, "こころ", "1234567890")
-        val json = mapper.writeValueAsString(request)
-
-        mockMvc.post("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { string("") }
-        }
-
-        verify(bookService, times(1)).create("1234567890", 2, "こころ")
-    }
-
-    @Test
-    fun updateBook() {
-        `when`(bookService.update(any(), any(), any(), any())).thenReturn(1)
-
-        val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
-        val json = mapper.writeValueAsString(request)
-
-        mockMvc.patch("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { json("""{ "id" : 1 }""") }
-        }
-
-        verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
-    }
-
-    @Test
-    fun updateBookNoAuthor() {
-        `when`(bookService.update(any(), any(), any(), any())).thenReturn(null)
-
-        val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
-        val json = mapper.writeValueAsString(request)
-
-        mockMvc.patch("/books") {
-            contentType = MediaType.APPLICATION_JSON
-            content = json
-        }.andExpect {
-            status { isOk() }
-            content { string("") }
-        }
-
-        verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
-    }
-
-    @Test
-    fun searchBook() {
-        `when`(bookService.search(any(), any(), any())).thenReturn(
-            listOf(
-                Book(1, "1234567890", "こころ", BookAuthor(1, "夏目　漱石", LocalDate.of(2000, 1, 1))),
-                Book(2, "1234567890", "こころ改訂版", BookAuthor(1, "夏目　漱石", LocalDate.of(2000, 1, 1))),
-            ),
-        )
-
-        mockMvc.get("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
-            .andExpect {
+            mockMvc.post("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
                 status { isOk() }
-                content {
-                    json(
-                        """
-                        [
-                            {
-                                "id": 1,
-                                "isbn": "1234567890",
-                                "title": "こころ",
-                                "author": {
-                                    "authorId": 1,
-                                    "name": "夏目　漱石",
-                                    "birthday": "2000-01-01"
-                                }
-                            },
-                            {
-                                "id": 2,
-                                "isbn": "1234567890",
-                                "title": "こころ改訂版",
-                                "author": {
-                                    "authorId": 1,
-                                    "name": "夏目　漱石",
-                                    "birthday": "2000-01-01"
-                                }
-                            }
-                        ]
-                        """.trimIndent(),
-                    )
-                }
+                content { json("""{ "id" : 1 }""") }
             }
 
-        verify(bookService, times(1)).search("こころ", "夏目　漱石", "1234567890")
-    }
+            verify(bookService, times(1)).create("1234567890", 2, "こころ")
+        }
+
+    @Test
+    fun createBookNoAuthor() =
+        runTest {
+            `when`(bookService.create(any(), any(), any())).thenReturn(null)
+
+            val request = CreateBookRequest(2, "こころ", "1234567890")
+            val json = mapper.writeValueAsString(request)
+
+            mockMvc.post("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { string("") }
+            }
+
+            verify(bookService, times(1)).create("1234567890", 2, "こころ")
+        }
+
+    @Test
+    fun updateBook() =
+        runTest {
+            `when`(bookService.update(any(), any(), any(), any())).thenReturn(1)
+
+            val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
+            val json = mapper.writeValueAsString(request)
+
+            mockMvc.patch("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { json("""{ "id" : 1 }""") }
+            }
+
+            verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
+        }
+
+    @Test
+    fun updateBookNoAuthor() =
+        runTest {
+            `when`(bookService.update(any(), any(), any(), any())).thenReturn(null)
+
+            val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
+            val json = mapper.writeValueAsString(request)
+
+            mockMvc.patch("/books") {
+                contentType = MediaType.APPLICATION_JSON
+                content = json
+            }.andExpect {
+                status { isOk() }
+                content { string("") }
+            }
+
+            verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
+        }
+
+    @Test
+    fun searchBook() =
+        runTest {
+            `when`(bookService.search(any(), any(), any())).thenReturn(
+                listOf(
+                    Book(1, "1234567890", "こころ", BookAuthor(1, "夏目　漱石", LocalDate.of(2000, 1, 1))),
+                    Book(2, "1234567890", "こころ改訂版", BookAuthor(1, "夏目　漱石", LocalDate.of(2000, 1, 1))),
+                ),
+            )
+
+            mockMvc.get("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
+                .andExpect {
+                    status { isOk() }
+                    content {
+                        json(
+                            """
+                            [
+                                {
+                                    "id": 1,
+                                    "isbn": "1234567890",
+                                    "title": "こころ",
+                                    "author": {
+                                        "authorId": 1,
+                                        "name": "夏目　漱石",
+                                        "birthday": "2000-01-01"
+                                    }
+                                },
+                                {
+                                    "id": 2,
+                                    "isbn": "1234567890",
+                                    "title": "こころ改訂版",
+                                    "author": {
+                                        "authorId": 1,
+                                        "name": "夏目　漱石",
+                                        "birthday": "2000-01-01"
+                                    }
+                                }
+                            ]
+                            """.trimIndent(),
+                        )
+                    }
+                }
+
+            verify(bookService, times(1)).search("こころ", "夏目　漱石", "1234567890")
+        }
 }

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class BookServiceImpl(private val bookRepository: BookRepository, private val authorRepository: AuthorRepository) : BookService {
     @Transactional
-    override fun create(
+    override suspend fun create(
         isbn: String?,
         authorId: Int,
         title: String,
@@ -24,7 +24,7 @@ class BookServiceImpl(private val bookRepository: BookRepository, private val au
     }
 
     @Transactional
-    override fun update(
+    override suspend fun update(
         id: Int,
         isbn: String?,
         authorId: Int,
@@ -39,7 +39,7 @@ class BookServiceImpl(private val bookRepository: BookRepository, private val au
         return id
     }
 
-    override fun search(
+    override suspend fun search(
         title: String?,
         authorName: String?,
         isbn: String?,
