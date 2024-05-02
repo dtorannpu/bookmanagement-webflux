@@ -20,12 +20,12 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
         name: String,
         birthday: LocalDate?,
     ): Int {
-        val author = create.newRecord(AUTHOR)
-        author.name = name
-        author.birthday = birthday
-        author.store()
-
-        return author.id!!
+        return create
+            .insertInto(AUTHOR)
+            .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
+            .values(name, birthday)
+            .returningResult(AUTHOR.ID)
+            .awaitSingle().map { it[AUTHOR.ID] }
     }
 
     override suspend fun update(
@@ -37,7 +37,7 @@ class AuthorRepositoryImpl(private val create: DSLContext) : AuthorRepository {
             .set(AUTHOR.NAME, name)
             .set(AUTHOR.BIRTHDAY, birthday)
             .where(AUTHOR.ID.eq(id))
-            .execute()
+            .awaitSingle()
     }
 
     override suspend fun findById(id: Int): Author? {
