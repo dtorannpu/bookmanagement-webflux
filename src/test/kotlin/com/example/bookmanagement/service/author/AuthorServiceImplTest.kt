@@ -3,13 +3,10 @@ package com.example.bookmanagement.service.author
 import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.repository.author.AuthorRepository
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.test.runTest
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
-import org.mockito.kotlin.any
-import org.mockito.kotlin.mock
 import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -28,10 +25,12 @@ class AuthorServiceImplTest {
             val actual = authorService.create("山田　太郎", LocalDate.of(2000, 1, 1))
             assertEquals(1, actual)
 
-            verify(mock, times(1)).create(
-                "山田　太郎",
-                LocalDate.of(2000, 1, 1),
-            )
+            coVerify(exactly = 1) {
+                mock.create(
+                    "山田　太郎",
+                    LocalDate.of(2000, 1, 1),
+                )
+            }
         }
 
     @Test
@@ -46,11 +45,13 @@ class AuthorServiceImplTest {
             val actual = authorService.update(1, "山田　太郎", LocalDate.of(2000, 1, 1))
             assertEquals(1, actual)
 
-            verify(mock, times(1)).update(
-                1,
-                "山田　太郎",
-                LocalDate.of(2000, 1, 1),
-            )
+            coVerify(exactly = 1) {
+                mock.update(
+                    1,
+                    "山田　太郎",
+                    LocalDate.of(2000, 1, 1),
+                )
+            }
         }
 
     @Test
@@ -65,11 +66,13 @@ class AuthorServiceImplTest {
             val actual = authorService.update(2, "山田　太郎", LocalDate.of(2000, 1, 1))
             assertNull(actual)
 
-            verify(mock, times(1)).update(
-                2,
-                "山田　太郎",
-                LocalDate.of(2000, 1, 1),
-            )
+            coVerify(exactly = 1) {
+                mock.update(
+                    2,
+                    "山田　太郎",
+                    LocalDate.of(2000, 1, 1),
+                )
+            }
         }
 
     @Test
@@ -84,6 +87,6 @@ class AuthorServiceImplTest {
             val actual = authorService.findById(1)
             assertNotNull(actual)
 
-            io.mockk.coVerify(exactly = 1) { mock.findById(1) }
+            coVerify(exactly = 1) { mock.findById(1) }
         }
 }

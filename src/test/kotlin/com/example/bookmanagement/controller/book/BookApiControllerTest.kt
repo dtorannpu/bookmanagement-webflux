@@ -12,20 +12,17 @@ import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.patch
-import org.springframework.test.web.servlet.post
+import org.springframework.test.web.reactive.server.WebTestClient
 import java.time.LocalDate
 import kotlin.test.Test
 
-@WebMvcTest(BookApiController::class)
+@WebFluxTest(BookApiController::class)
 class BookApiControllerTest {
     @Autowired
-    private lateinit var mockMvc: MockMvc
+    private lateinit var webTestClient: WebTestClient
 
     @Autowired
     private lateinit var mapper: ObjectMapper
@@ -41,13 +38,14 @@ class BookApiControllerTest {
             val request = CreateBookRequest(2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            mockMvc.post("/books") {
-                contentType = MediaType.APPLICATION_JSON
-                content = json
-            }.andExpect {
-                status { isOk() }
-                content { json("""{ "id" : 1 }""") }
-            }
+            webTestClient.post()
+                .uri("/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(json)
+                .exchange()
+                .expectStatus().isOk
+                .expectBody()
+                .json("""{ "id" : 1 }""")
 
             verify(bookService, times(1)).create("1234567890", 2, "こころ")
         }
@@ -60,13 +58,13 @@ class BookApiControllerTest {
             val request = CreateBookRequest(2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            mockMvc.post("/books") {
-                contentType = MediaType.APPLICATION_JSON
-                content = json
-            }.andExpect {
-                status { isOk() }
-                content { string("") }
-            }
+            webTestClient.post()
+                .uri("/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(json)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody().isEmpty
 
             verify(bookService, times(1)).create("1234567890", 2, "こころ")
         }
@@ -79,13 +77,14 @@ class BookApiControllerTest {
             val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            mockMvc.patch("/books") {
-                contentType = MediaType.APPLICATION_JSON
-                content = json
-            }.andExpect {
-                status { isOk() }
-                content { json("""{ "id" : 1 }""") }
-            }
+            webTestClient.patch()
+                .uri("/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(json)
+                .exchange()
+                .expectStatus().isOk
+                .expectBody()
+                .json("""{ "id" : 1 }""")
 
             verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
         }
@@ -98,13 +97,13 @@ class BookApiControllerTest {
             val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            mockMvc.patch("/books") {
-                contentType = MediaType.APPLICATION_JSON
-                content = json
-            }.andExpect {
-                status { isOk() }
-                content { string("") }
-            }
+            webTestClient.patch()
+                .uri("/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(json)
+                .exchange()
+                .expectStatus().isOk
+                .expectBody().isEmpty
 
             verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
         }
@@ -119,38 +118,37 @@ class BookApiControllerTest {
                 ),
             )
 
-            mockMvc.get("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
-                .andExpect {
-                    status { isOk() }
-                    content {
-                        json(
-                            """
-                            [
-                                {
-                                    "id": 1,
-                                    "isbn": "1234567890",
-                                    "title": "こころ",
-                                    "author": {
-                                        "authorId": 1,
-                                        "name": "夏目　漱石",
-                                        "birthday": "2000-01-01"
-                                    }
-                                },
-                                {
-                                    "id": 2,
-                                    "isbn": "1234567890",
-                                    "title": "こころ改訂版",
-                                    "author": {
-                                        "authorId": 1,
-                                        "name": "夏目　漱石",
-                                        "birthday": "2000-01-01"
-                                    }
-                                }
-                            ]
-                            """.trimIndent(),
-                        )
-                    }
-                }
+            webTestClient.get()
+                .uri("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
+                .exchange()
+                .expectStatus().isOk
+                .expectBody()
+                .json(
+                    """
+                    [
+                        {
+                            "id": 1,
+                            "isbn": "1234567890",
+                            "title": "こころ",
+                            "author": {
+                                "authorId": 1,
+                                "name": "夏目　漱石",
+                                "birthday": "2000-01-01"
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "isbn": "1234567890",
+                            "title": "こころ改訂版",
+                            "author": {
+                                "authorId": 1,
+                                "name": "夏目　漱石",
+                                "birthday": "2000-01-01"
+                            }
+                        }
+                    ]
+                    """.trimIndent(),
+                )
 
             verify(bookService, times(1)).search("こころ", "夏目　漱石", "1234567890")
         }
