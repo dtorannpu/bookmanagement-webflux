@@ -20,13 +20,12 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         authorId: Int,
         title: String,
     ): Int {
-        val book = create.newRecord(BOOK)
-        book.isbn = isbn
-        book.authorId = authorId
-        book.title = title
-        book.store()
-
-        return book.id!!
+        return create
+            .insertInto(BOOK)
+            .columns(BOOK.ISBN, BOOK.AUTHOR_ID, BOOK.TITLE)
+            .values(isbn, authorId, title)
+            .returningResult(BOOK.ID)
+            .awaitSingle().map { it[BOOK.ID] }
     }
 
     override suspend fun update(

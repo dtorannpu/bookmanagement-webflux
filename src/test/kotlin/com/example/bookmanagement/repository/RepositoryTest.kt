@@ -6,7 +6,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 
 abstract class RepositoryTest {
     companion object {
-        private val db = PostgreSQLContainer("postgres:16.2")
+        val db = PostgreSQLContainer("postgres:16.2")
 
         init {
             db.start()
@@ -18,6 +18,12 @@ abstract class RepositoryTest {
             registry.add("spring.datasource.url", db::getJdbcUrl)
             registry.add("spring.datasource.username", db::getUsername)
             registry.add("spring.datasource.password", db::getPassword)
+
+            registry.add(
+                "spring.r2dbc.url",
+            ) { String.format("r2dbc:pool:postgresql://%s:%d/%s", db.host, db.firstMappedPort, db.databaseName) }
+            registry.add("spring.r2dbc.username", db::getUsername)
+            registry.add("spring.r2dbc.password", db::getPassword)
         }
     }
 }

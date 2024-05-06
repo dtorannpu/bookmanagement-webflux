@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jooq.JooqTest
-import org.springframework.transaction.annotation.Transactional
+import org.springframework.test.context.ActiveProfiles
 import java.time.LocalDate
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -18,7 +18,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @JooqTest
-@Transactional
+@ActiveProfiles("test")
 class AuthorRepositoryImplTest
     @Autowired
     constructor(
