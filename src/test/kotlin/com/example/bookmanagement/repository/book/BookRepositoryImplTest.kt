@@ -198,12 +198,11 @@ class BookRepositoryImplTest
                         .returningResult(AUTHOR.ID)
                         .awaitSingle().map { it[AUTHOR.ID] }
 
-                val book2Id =
-                    create.insertInto(BOOK)
-                        .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
-                        .values("坊ちゃん", author2Id)
-                        .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                create.insertInto(BOOK)
+                    .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
+                    .values("坊ちゃん", author2Id)
+                    .returningResult(BOOK.ID)
+                    .awaitFirstOrNull()
 
                 val actual = bookRepository.search(null, null, "1234567890")
 
