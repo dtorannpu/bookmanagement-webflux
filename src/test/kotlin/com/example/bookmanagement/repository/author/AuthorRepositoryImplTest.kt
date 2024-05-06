@@ -7,6 +7,7 @@ import kotlinx.coroutines.reactive.awaitFirstOrNull
 import kotlinx.coroutines.reactive.awaitSingle
 import kotlinx.coroutines.test.runTest
 import org.jooq.DSLContext
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -25,6 +26,13 @@ class AuthorRepositoryImplTest
         private var authorRepository: AuthorRepository,
     ) :
     RepositoryTest() {
+        @AfterEach
+        fun afterEach() =
+            runTest {
+                create.deleteFrom(BOOK).awaitFirstOrNull()
+                create.deleteFrom(AUTHOR).awaitFirstOrNull()
+            }
+
         @Test
         fun testCreateAuthor() =
             runTest {
