@@ -1,35 +1,38 @@
 package com.example.bookmanagement.service.author
 
+import com.example.bookmanagement.TransactionCoroutineOperator
 import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.repository.author.AuthorRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 /**
  * 著者サービス実装
  */
 @Service
-class AuthorServiceImpl(private val authorRepository: AuthorRepository) :
+class AuthorServiceImpl(
+    private val authorRepository: AuthorRepository,
+    private val transactionCoroutineOperator: TransactionCoroutineOperator,
+) :
     AuthorService {
-    @Transactional
     override suspend fun create(
         name: String,
         birthday: LocalDate?,
     ): Int {
-        return authorRepository.create(name, birthday)
+        return transactionCoroutineOperator.execute { authorRepository.create(name, birthday) }
     }
 
-    @Transactional
     override suspend fun update(
         id: Int,
         name: String,
         birthday: LocalDate?,
     ): Int? {
-        if (authorRepository.update(id, name, birthday) == 0) {
-            return null
+        return transactionCoroutineOperator.execute {
+            if (authorRepository.update(id, name, birthday) == 0) {
+                return@execute null
+            }
+            return@execute id
         }
-        return id
     }
 
     override suspend fun findById(id: Int): Author? {

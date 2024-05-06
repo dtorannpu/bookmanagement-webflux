@@ -1,10 +1,10 @@
 package com.example.bookmanagement.repository.book
 
+import com.example.bookmanagement.TransactionAwareDSLContext
 import com.example.bookmanagement.db.jooq.gen.tables.references.BOOK
 import com.example.bookmanagement.model.Book
 import com.example.bookmanagement.model.BookAuthor
 import kotlinx.coroutines.reactive.awaitSingle
-import org.jooq.DSLContext
 import org.jooq.Operator
 import org.jooq.impl.DSL.row
 import org.springframework.stereotype.Repository
@@ -14,13 +14,13 @@ import reactor.core.publisher.Flux
  * 書籍リポジトリ実装
  */
 @Repository
-class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
+class BookRepositoryImpl(private val dslContext: TransactionAwareDSLContext) : BookRepository {
     override suspend fun create(
         isbn: String?,
         authorId: Int,
         title: String,
     ): Int {
-        return create
+        return dslContext.get()
             .insertInto(BOOK)
             .columns(BOOK.ISBN, BOOK.AUTHOR_ID, BOOK.TITLE)
             .values(isbn, authorId, title)
@@ -34,7 +34,7 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         authorId: Int,
         title: String,
     ): Int {
-        return create.update(BOOK)
+        return dslContext.get().update(BOOK)
             .set(BOOK.ISBN, isbn)
             .set(BOOK.AUTHOR_ID, authorId)
             .set(BOOK.TITLE, title)
@@ -48,7 +48,7 @@ class BookRepositoryImpl(private val create: DSLContext) : BookRepository {
         isbn: String?,
     ): List<Book> {
         val query =
-            create.select(
+            dslContext.get().select(
                 BOOK.ID,
                 BOOK.ISBN,
                 BOOK.TITLE,
