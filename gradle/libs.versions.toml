@@ -1,0 +1,59 @@
+[versions]
+ktlint = "1.5.0"
+jooq = "3.20.1"
+org-springframework-boot = "3.4.3"
+io-spring-dependency-management = "1.1.7"
+org-jetbrains-kotlin-jvm = "2.1.10"
+org-jetbrains-kotlin-plugin-spring = "2.1.10"
+org-jlleitschuh-gradle-ktlint = "12.1.2"
+co-uzzu-dotenv-gradle = "4.0.0"
+org-openapi-generator = "7.4.0"
+flyway = "11.3.3"
+org-springdoc-springdoc-openapi-starter-webflux-api = "2.8.5"
+io-r2dbc-r2dbc-pool = "1.0.2.RELEASE"
+org-mockito-kotlin-mockito-kotlin = "5.4.0"
+org-jetbrains-kotlinx-kotlinx-coroutines-core = "1.10.1"
+org-jetbrains-kotlinx-kotlinx-coroutines-test = "1.10.1"
+io-mockk-mockk = "1.13.16"
+
+[libraries]
+org-flywaydb-flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
+org-springframework-boot-spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }
+org-jooq-jooq = { group = "org.jooq", name = "jooq", version.ref = "jooq" }
+org-jooq-jooq-kotlin = { group = "org.jooq", name = "jooq-kotlin", version.ref = "jooq" }
+org-jooq-jooq-kotlin-coroutines = { group = "org.jooq", name = "jooq-kotlin-coroutines", version.ref = "jooq" }
+org-jooq-jooq-meta = { group = "org.jooq", name = "jooq-meta", version.ref = "jooq" }
+org-jooq-jooq-codegen = { group = "org.jooq", name = "jooq-codegen", version.ref = "jooq" }
+org-springdoc-springdoc-openapi-starter-webflux-api = { group = "org.springdoc", name = "springdoc-openapi-starter-webflux-api", version.ref = "org-springdoc-springdoc-openapi-starter-webflux-api" }
+io-r2dbc-r2dbc-pool = { group = "io.r2dbc", name = "r2dbc-pool", version.ref = "io-r2dbc-r2dbc-pool" }
+co-uzzu-dotenv-gradle = { group = "co.uzzu.dotenv", name = "gradle", version.ref = "co-uzzu-dotenv-gradle" }
+org-mockito-kotlin-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "org-mockito-kotlin-mockito-kotlin" }
+org-jetbrains-kotlinx-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "org-jetbrains-kotlinx-kotlinx-coroutines-core" }
+org-jetbrains-kotlinx-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "org-jetbrains-kotlinx-kotlinx-coroutines-test" }
+io-mockk-mockk = { group = "io.mockk", name = "mockk", version.ref = "io-mockk-mockk" }
+com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+org-springframework-boot-spring-boot-starter-webflux = { group = "org.springframework.boot", name = "spring-boot-starter-webflux" }
+org-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
+org-springframework-boot-spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
+org-testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+io-projectreactor-reactor-test = { group = "io.projectreactor", name = "reactor-test" }
+org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
+org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql" }
+org-postgresql-r2dbc-postgresql = { group = "org.postgresql", name = "r2dbc-postgresql" }
+org-springframework-boot-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
+
+[plugins]
+org-jooq-jooq-codegen-gradle = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }
+org-springframework-boot = { id = "org.springframework.boot", version.ref = "org-springframework-boot" }
+io-spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "io-spring-dependency-management" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+org-jetbrains-kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "org-jetbrains-kotlin-plugin-spring" }
+org-jlleitschuh-gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "org-jlleitschuh-gradle-ktlint" }
+co-uzzu-dotenv-gradle = { id = "co.uzzu.dotenv.gradle", version.ref = "co-uzzu-dotenv-gradle" }
+org-flywaydb-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
+org-openapi-generator = { id = "org.openapi.generator", version.ref = "org-openapi-generator" }
+jacoco = { id = "jacoco" }

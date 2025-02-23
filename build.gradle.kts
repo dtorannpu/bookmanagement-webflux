@@ -2,21 +2,21 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.11.0")
+        classpath(libs.org.flywaydb.flyway.database.postgresql)
     }
 }
 
 plugins {
-    id("org.springframework.boot") version "3.2.4"
-    id("io.spring.dependency-management") version "1.1.4"
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.9.23"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
-    id("org.jooq.jooq-codegen-gradle") version "3.19.7"
-    id("co.uzzu.dotenv.gradle") version "4.0.0"
-    id("org.flywaydb.flyway") version "10.11.0"
-    id("org.openapi.generator") version "7.4.0"
-    id("jacoco")
+    alias(libs.plugins.org.springframework.boot)
+    alias(libs.plugins.io.spring.dependency.management)
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.spring)
+    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
+    alias(libs.plugins.org.jooq.jooq.codegen.gradle)
+    alias(libs.plugins.co.uzzu.dotenv.gradle)
+    alias(libs.plugins.org.flywaydb.flyway)
+    alias(libs.plugins.org.openapi.generator)
+    alias(libs.plugins.jacoco)
 }
 
 group = "com.example"
@@ -41,35 +41,36 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-jooq")
-    implementation("org.jooq:jooq:3.19.7")
-    implementation("org.jooq:jooq-kotlin:3.19.7")
-    implementation("org.jooq:jooq-kotlin-coroutines:3.19.7")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.flywaydb:flyway-core")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springdoc:springdoc-openapi-starter-webflux-api:2.5.0")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("io.projectreactor:reactor-test")
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("org.postgresql:r2dbc-postgresql")
-    runtimeOnly("io.r2dbc:r2dbc-pool:1.0.1.RELEASE")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    jooqCodegen("org.postgresql:postgresql")
-    jooqCodegen("org.jooq:jooq:3.19.7")
-    jooqCodegen("org.jooq:jooq-meta:3.19.7")
-    jooqCodegen("org.jooq:jooq-codegen:3.19.7")
-    jooqCodegen("co.uzzu.dotenv:gradle:4.0.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
-    testImplementation("io.mockk:mockk:1.12.0")
+    implementation(libs.org.springframework.boot.spring.boot.starter.jooq)
+    implementation(libs.org.jooq.jooq)
+    implementation(libs.org.jooq.jooq.kotlin)
+    implementation(libs.org.jooq.jooq.kotlin.coroutines)
+    implementation(libs.com.fasterxml.jackson.module.jackson.module.kotlin)
+    implementation(libs.org.flywaydb.flyway.core)
+    implementation(libs.org.flywaydb.flyway.database.postgresql)
+    implementation(libs.org.jetbrains.kotlin.kotlin.reflect)
+    implementation(libs.org.springframework.boot.spring.boot.starter.validation)
+    implementation(libs.org.springdoc.springdoc.openapi.starter.webflux.api)
+    implementation(libs.org.springframework.boot.spring.boot.starter.webflux)
+    testImplementation(libs.org.testcontainers.junit.jupiter)
+    testImplementation(libs.org.springframework.boot.spring.boot.testcontainers)
+    testImplementation(libs.org.testcontainers.postgresql)
+    testImplementation(libs.io.projectreactor.reactor.test)
+    developmentOnly(libs.org.springframework.boot.spring.boot.docker.compose)
+    runtimeOnly(libs.org.postgresql.postgresql)
+    runtimeOnly(libs.org.postgresql.r2dbc.postgresql)
+    runtimeOnly(libs.io.r2dbc.r2dbc.pool)
+    testImplementation(libs.org.springframework.boot.spring.boot.starter.test)
+    jooqCodegen(libs.org.postgresql.postgresql)
+    jooqCodegen(libs.org.jooq.jooq)
+    jooqCodegen(libs.org.jooq.jooq.meta)
+    jooqCodegen(libs.org.jooq.jooq.codegen)
+    jooqCodegen(libs.co.uzzu.dotenv.gradle)
+    testImplementation(libs.org.jetbrains.kotlin.kotlin.test)
+    testImplementation(libs.org.mockito.kotlin.mockito.kotlin)
+    implementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.core)
+    testImplementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.test)
+    testImplementation(libs.io.mockk.mockk)
 }
 
 kotlin {
@@ -196,7 +197,7 @@ flyway {
 }
 
 ktlint {
-    version.set("1.5.0")
+    version.set(libs.versions.ktlint)
     filter {
         exclude { element ->
             element.file.path.contains("generated")
