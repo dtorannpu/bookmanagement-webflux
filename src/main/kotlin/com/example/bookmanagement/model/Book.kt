@@ -8,4 +8,9 @@ package com.example.bookmanagement.model
  * @param title タイトル
  * @param author 書籍の著者
  */
-data class Book(val id: Int, val isbn: String?, val title: String, val author: BookAuthor)
+data class Book(
+    val id: Int,
+    val isbn: String?,
+    val title: String,
+    val author: BookAuthor,
+)

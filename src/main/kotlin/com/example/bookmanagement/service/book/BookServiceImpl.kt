@@ -49,7 +49,5 @@ class BookServiceImpl(
         title: String?,
         authorName: String?,
         isbn: String?,
-    ): List<Book> {
-        return bookRepository.search(title, authorName, isbn)
-    }
+    ): List<Book> = bookRepository.search(title, authorName, isbn)
 }

@@ -17,25 +17,25 @@ import org.springframework.web.bind.annotation.RestController
  * 書籍コントローラー
  */
 @RestController
-class BookApiController(private val bookService: BookService) : BooksApi {
-    override suspend fun createBook(createBookRequest: CreateBookRequest): ResponseEntity<CreateBookResponse> {
-        return bookService.create(createBookRequest.isbn, createBookRequest.authorId, createBookRequest.title)?.let {
+class BookApiController(
+    private val bookService: BookService,
+) : BooksApi {
+    override suspend fun createBook(createBookRequest: CreateBookRequest): ResponseEntity<CreateBookResponse> =
+        bookService.create(createBookRequest.isbn, createBookRequest.authorId, createBookRequest.title)?.let {
             ResponseEntity.ok(CreateBookResponse(it))
         } ?: ResponseEntity.ok().build()
-    }
 
-    override suspend fun updateBook(updateBookRequest: UpdateBookRequest): ResponseEntity<UpdateBookResponse> {
-        return bookService.update(updateBookRequest.id, updateBookRequest.isbn, updateBookRequest.authorId, updateBookRequest.title)?.let {
+    override suspend fun updateBook(updateBookRequest: UpdateBookRequest): ResponseEntity<UpdateBookResponse> =
+        bookService.update(updateBookRequest.id, updateBookRequest.isbn, updateBookRequest.authorId, updateBookRequest.title)?.let {
             ResponseEntity.ok(UpdateBookResponse(it))
         } ?: ResponseEntity.ok().build()
-    }
 
     override fun searchBook(
         bookTitle: String?,
         authorName: String?,
         isbn: String?,
-    ): ResponseEntity<Flow<Book>> {
-        return ResponseEntity.ok(
+    ): ResponseEntity<Flow<Book>> =
+        ResponseEntity.ok(
             flow {
                 bookService.search(bookTitle, authorName, isbn).map {
                     emit(
@@ -54,5 +54,4 @@ class BookApiController(private val bookService: BookService) : BooksApi {
                 }
             },
         )
-    }
 }

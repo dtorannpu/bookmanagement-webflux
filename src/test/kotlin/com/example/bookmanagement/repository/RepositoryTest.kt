@@ -17,7 +17,8 @@ abstract class RepositoryTest {
         @BeforeAll
         @JvmStatic
         fun beforeAll() {
-            Flyway.configure()
+            Flyway
+                .configure()
                 .dataSource(db.jdbcUrl, db.username, db.password)
                 .load()
                 .migrate()

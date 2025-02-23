@@ -13,14 +13,11 @@ import java.time.LocalDate
 class AuthorServiceImpl(
     private val authorRepository: AuthorRepository,
     private val transactionCoroutineOperator: TransactionCoroutineOperator,
-) :
-    AuthorService {
+) : AuthorService {
     override suspend fun create(
         name: String,
         birthday: LocalDate?,
-    ): Int {
-        return transactionCoroutineOperator.execute { authorRepository.create(name, birthday) }
-    }
+    ): Int = transactionCoroutineOperator.execute { authorRepository.create(name, birthday) }
 
     override suspend fun update(
         id: Int,
@@ -35,7 +32,5 @@ class AuthorServiceImpl(
         }
     }
 
-    override suspend fun findById(id: Int): Author? {
-        return authorRepository.findById(id)
-    }
+    override suspend fun findById(id: Int): Author? = authorRepository.findById(id)
 }

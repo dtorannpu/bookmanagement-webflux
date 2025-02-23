@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class DSLContextConnection(private val connectionFactory: ConnectionFactory) {
+class DSLContextConnection(
+    private val connectionFactory: ConnectionFactory,
+) {
     @Bean
     fun dslContext(): DSLContext = DSL.using(connectionFactory).dsl()
 }

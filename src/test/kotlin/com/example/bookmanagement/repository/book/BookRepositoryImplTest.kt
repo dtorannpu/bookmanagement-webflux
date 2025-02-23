@@ -19,7 +19,10 @@ import kotlin.test.assertNull
 @SpringBootTest
 class BookRepositoryImplTest
     @Autowired
-    constructor(private val create: DSLContext, private val bookRepository: BookRepositoryImpl) : RepositoryTest() {
+    constructor(
+        private val create: DSLContext,
+        private val bookRepository: BookRepositoryImpl,
+    ) : RepositoryTest() {
         @AfterEach
         fun afterEach() =
             runTest {
@@ -31,16 +34,19 @@ class BookRepositoryImplTest
         fun testCreateBook() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val bookId = bookRepository.create("1234567890", authorId, "こころ")
 
                 val actual =
-                    create.selectFrom(BOOK)
+                    create
+                        .selectFrom(BOOK)
                         .where(BOOK.ID.eq(bookId))
                         .awaitFirstOrNull()
 
@@ -54,32 +60,39 @@ class BookRepositoryImplTest
         fun testUpdateBook() =
             runTest {
                 val changeBeforeAuthorAuthorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val changeAfterAuthorAuthorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　次郎", LocalDate.of(2000, 1, 1))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val bookId =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.ISBN, BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("1234567890", "こころ", changeBeforeAuthorAuthorId)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val updateCount = bookRepository.update(bookId, "0123456789", changeAfterAuthorAuthorId, "坊ちゃん")
 
                 assertEquals(1, updateCount)
 
                 val actual =
-                    create.selectFrom(BOOK)
+                    create
+                        .selectFrom(BOOK)
                         .where(BOOK.ID.eq(bookId))
                         .awaitFirstOrNull()
 
@@ -93,32 +106,40 @@ class BookRepositoryImplTest
         fun testBookSearchNoCondition() =
             runTest {
                 val author1Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val book1Id =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.ISBN, BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("1234567890", "こころ", author1Id)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val author2Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME)
                         .values("山田　次郎")
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val book2Id =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("坊ちゃん", author2Id)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val actual = bookRepository.search(null, null, null)
 
@@ -139,27 +160,34 @@ class BookRepositoryImplTest
         fun testBookSearchByTitle() =
             runTest {
                 val author1Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val book1Id =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.ISBN, BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("1234567890", "こころ", author1Id)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val author2Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME)
                         .values("山田　次郎")
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
-                create.insertInto(BOOK)
+                create
+                    .insertInto(BOOK)
                     .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
                     .values("坊ちゃん", author2Id)
                     .awaitFirstOrNull()
@@ -178,27 +206,34 @@ class BookRepositoryImplTest
         fun testBookSearchByIsbn() =
             runTest {
                 val author1Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val book1Id =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.ISBN, BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("1234567890", "こころ", author1Id)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val author2Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME)
                         .values("山田　次郎")
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
-                create.insertInto(BOOK)
+                create
+                    .insertInto(BOOK)
                     .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
                     .values("坊ちゃん", author2Id)
                     .returningResult(BOOK.ID)
@@ -218,30 +253,37 @@ class BookRepositoryImplTest
         fun testBookSearchByAuthorName() =
             runTest {
                 val author1Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
-                create.insertInto(BOOK)
+                create
+                    .insertInto(BOOK)
                     .columns(BOOK.ISBN, BOOK.TITLE, BOOK.AUTHOR_ID)
                     .values("1234567890", "こころ", author1Id)
                     .awaitFirstOrNull()
 
                 val author2Id =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME)
                         .values("山田　次郎")
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val book2Id =
-                    create.insertInto(BOOK)
+                    create
+                        .insertInto(BOOK)
                         .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
                         .values("坊ちゃん", author2Id)
                         .returningResult(BOOK.ID)
-                        .awaitSingle().map { it[BOOK.ID] }
+                        .awaitSingle()
+                        .map { it[BOOK.ID] }
 
                 val actual = bookRepository.search(null, "次郎", null)
 

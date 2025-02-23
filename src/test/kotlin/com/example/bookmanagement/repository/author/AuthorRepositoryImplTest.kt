@@ -24,8 +24,7 @@ class AuthorRepositoryImplTest
     constructor(
         private val create: DSLContext,
         private var authorRepository: AuthorRepository,
-    ) :
-    RepositoryTest() {
+    ) : RepositoryTest() {
         @AfterEach
         fun afterEach() =
             runTest {
@@ -39,7 +38,8 @@ class AuthorRepositoryImplTest
                 val id = authorRepository.create("岡本　太郎", LocalDate.of(2000, 1, 31))
 
                 val actual =
-                    create.selectFrom(AUTHOR)
+                    create
+                        .selectFrom(AUTHOR)
                         .where(AUTHOR.ID.eq(id))
                         .awaitFirstOrNull()
 
@@ -52,18 +52,21 @@ class AuthorRepositoryImplTest
         fun testUpdateAuthor() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val updateCount = authorRepository.update(authorId, "岡本　太郎", LocalDate.of(2000, 1, 31))
 
                 assertEquals(1, updateCount)
 
                 val actual =
-                    create.selectFrom(AUTHOR)
+                    create
+                        .selectFrom(AUTHOR)
                         .where(AUTHOR.ID.eq(authorId))
                         .awaitFirstOrNull()
 
@@ -84,11 +87,13 @@ class AuthorRepositoryImplTest
         fun testFindAuthorNoBook() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("山田　太郎", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val actual = authorRepository.findById(authorId)
                 assertNotNull(actual)
@@ -101,11 +106,13 @@ class AuthorRepositoryImplTest
         fun testForOnlyRequiredAuthorItems() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME)
                         .values("山田　太郎")
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 val actual = authorRepository.findById(authorId)
                 assertNotNull(actual)
@@ -117,18 +124,22 @@ class AuthorRepositoryImplTest
         fun testGetAuthorAndBook() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("夏目　漱石", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
-                create.insertInto(BOOK)
+                create
+                    .insertInto(BOOK)
                     .columns(BOOK.TITLE, BOOK.ISBN, BOOK.AUTHOR_ID)
                     .values("こころ", "9780720612974", authorId)
                     .awaitFirstOrNull()
 
-                create.insertInto(BOOK)
+                create
+                    .insertInto(BOOK)
                     .columns(BOOK.TITLE, BOOK.AUTHOR_ID)
                     .values("坊ちゃん", authorId)
                     .awaitFirstOrNull()
@@ -150,11 +161,13 @@ class AuthorRepositoryImplTest
         fun testExistsById() =
             runTest {
                 val authorId =
-                    create.insertInto(AUTHOR)
+                    create
+                        .insertInto(AUTHOR)
                         .columns(AUTHOR.NAME, AUTHOR.BIRTHDAY)
                         .values("夏目　漱石", LocalDate.of(2023, 5, 13))
                         .returningResult(AUTHOR.ID)
-                        .awaitSingle().map { it[AUTHOR.ID] }
+                        .awaitSingle()
+                        .map { it[AUTHOR.ID] }
 
                 assertTrue(authorRepository.existsById(authorId))
             }

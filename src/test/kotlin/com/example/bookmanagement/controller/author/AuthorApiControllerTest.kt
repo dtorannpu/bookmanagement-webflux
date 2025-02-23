@@ -38,12 +38,14 @@ class AuthorApiControllerTest {
             val request = CreateAuthorRequest("test", LocalDate.of(2000, 1, 1))
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.post()
+            webTestClient
+                .post()
                 .uri("/authors")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json("""{ "id" : 1 }""")
 
@@ -58,12 +60,14 @@ class AuthorApiControllerTest {
             val request = UpdateAuthorRequest(1, "test", LocalDate.of(2000, 1, 1))
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.patch()
+            webTestClient
+                .patch()
                 .uri("/authors")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json("""{ "id" : 1 }""")
 
@@ -78,12 +82,14 @@ class AuthorApiControllerTest {
             val request = UpdateAuthorRequest(1, "test", LocalDate.of(2000, 1, 1))
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.patch()
+            webTestClient
+                .patch()
                 .uri("/authors")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
 
             verify(authorService, times(1)).update(1, "test", LocalDate.of(2000, 1, 1))
         }
@@ -103,10 +109,12 @@ class AuthorApiControllerTest {
                 ),
             )
 
-            webTestClient.get()
+            webTestClient
+                .get()
                 .uri("/authors/1")
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json(
                     """
@@ -138,10 +146,12 @@ class AuthorApiControllerTest {
         runTest {
             `when`(authorService.findById(any())).thenReturn(Author(1, "夏目　漱石", null, listOf()))
 
-            webTestClient.get()
+            webTestClient
+                .get()
                 .uri("/authors/1")
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json(
                     """
@@ -162,10 +172,12 @@ class AuthorApiControllerTest {
         runTest {
             `when`(authorService.findById(any())).thenReturn(null)
 
-            webTestClient.get()
+            webTestClient
+                .get()
                 .uri("/authors/1")
                 .exchange()
-                .expectStatus().isNotFound
+                .expectStatus()
+                .isNotFound
 
             verify(authorService, times(1)).findById(1)
         }

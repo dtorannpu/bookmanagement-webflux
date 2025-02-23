@@ -15,20 +15,21 @@ import org.springframework.web.bind.annotation.RestController
  * 著者コントローラー
  */
 @RestController
-class AuthorApiController(private val authorService: AuthorService) : AuthorsApi {
+class AuthorApiController(
+    private val authorService: AuthorService,
+) : AuthorsApi {
     override suspend fun createAuthor(createAuthorRequest: CreateAuthorRequest): ResponseEntity<CreateAuthorResponse> {
         val id = authorService.create(createAuthorRequest.name, createAuthorRequest.birthday)
         return ResponseEntity.ok(CreateAuthorResponse(id))
     }
 
-    override suspend fun updateAuthor(updateAuthorRequest: UpdateAuthorRequest): ResponseEntity<UpdateAuthorResponse> {
-        return authorService.update(updateAuthorRequest.id, updateAuthorRequest.name, updateAuthorRequest.birthday)?.let {
+    override suspend fun updateAuthor(updateAuthorRequest: UpdateAuthorRequest): ResponseEntity<UpdateAuthorResponse> =
+        authorService.update(updateAuthorRequest.id, updateAuthorRequest.name, updateAuthorRequest.birthday)?.let {
             ResponseEntity.ok(UpdateAuthorResponse(it))
         } ?: ResponseEntity.ok().build()
-    }
 
-    override suspend fun getAuthorById(id: Int): ResponseEntity<Author> {
-        return authorService.findById(id)?.let { author ->
+    override suspend fun getAuthorById(id: Int): ResponseEntity<Author> =
+        authorService.findById(id)?.let { author ->
             ResponseEntity.ok(
                 Author(
                     id = author.id,
@@ -41,5 +42,4 @@ class AuthorApiController(private val authorService: AuthorService) : AuthorsApi
                 ),
             )
         } ?: ResponseEntity.notFound().build()
-    }
 }
