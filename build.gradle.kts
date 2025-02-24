@@ -235,6 +235,7 @@ openApiGenerate {
             "dateLibrary" to "java8",
             "useSpringBoot3" to "true",
             "interfaceOnly" to "true",
+            "reactive" to "true"
         ),
     )
 }
