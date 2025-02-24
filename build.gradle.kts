@@ -1,30 +1,33 @@
+import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jooq.codegen.gradle.CodegenTask
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.11.0")
+        classpath(libs.org.flywaydb.flyway.database.postgresql)
     }
 }
 
 plugins {
-    id "org.springframework.boot" version "3.2.4"
-    id "io.spring.dependency-management" version "1.1.4"
-    id "org.jetbrains.kotlin.jvm" version "1.9.23"
-    id "org.jetbrains.kotlin.plugin.spring" version "1.9.23"
-    id "org.jlleitschuh.gradle.ktlint" version "12.1.0"
-    id "org.jooq.jooq-codegen-gradle" version "${jooqVersion}"
-    id "co.uzzu.dotenv.gradle" version "4.0.0"
-    id "org.flywaydb.flyway" version "10.11.0"
-    id "org.openapi.generator" version "7.4.0"
-    id "jacoco"
+    alias(libs.plugins.org.springframework.boot)
+    alias(libs.plugins.io.spring.dependency.management)
+    alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.spring)
+    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
+    alias(libs.plugins.org.jooq.jooq.codegen.gradle)
+    alias(libs.plugins.co.uzzu.dotenv.gradle)
+    alias(libs.plugins.org.flywaydb.flyway)
+    alias(libs.plugins.org.openapi.generator)
+    alias(libs.plugins.jacoco)
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = "21"
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 kotlin.sourceSets.main {
@@ -33,64 +36,62 @@ kotlin.sourceSets.main {
 }
 
 repositories {
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
     mavenCentral()
+    maven {
+        url = uri("https://plugins.gradle.org/m2/")
+    }
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-jooq"
-    implementation "org.jooq:jooq:${jooqVersion}"
-    implementation "org.jooq:jooq-kotlin:${jooqVersion}"
-    implementation "org.jooq:jooq-kotlin-coroutines:${jooqVersion}"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
-    implementation "org.flywaydb:flyway-core"
-    implementation "org.jetbrains.kotlin:kotlin-reflect"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springdoc:springdoc-openapi-starter-webflux-api:2.5.0"
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.springframework.boot:spring-boot-testcontainers"
-    testImplementation "org.testcontainers:postgresql"
-    testImplementation 'io.projectreactor:reactor-test'
-    developmentOnly "org.springframework.boot:spring-boot-docker-compose"
-    runtimeOnly "org.postgresql:postgresql"
-    runtimeOnly "org.postgresql:r2dbc-postgresql"
-    runtimeOnly "io.r2dbc:r2dbc-pool:1.0.1.RELEASE"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    jooqCodegen "org.postgresql:postgresql"
-    jooqCodegen "org.jooq:jooq:${jooqVersion}"
-    jooqCodegen "org.jooq:jooq-meta:${jooqVersion}"
-    jooqCodegen "org.jooq:jooq-codegen:${jooqVersion}"
-    jooqCodegen "co.uzzu.dotenv:gradle:4.0.0"
-    testImplementation "org.jetbrains.kotlin:kotlin-test"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:5.3.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0"
-    testImplementation "io.mockk:mockk:1.12.0"
+    implementation(libs.org.springframework.boot.spring.boot.starter.jooq)
+    implementation(libs.org.jooq.jooq)
+    implementation(libs.org.jooq.jooq.kotlin)
+    implementation(libs.org.jooq.jooq.kotlin.coroutines)
+    implementation(libs.com.fasterxml.jackson.module.jackson.module.kotlin)
+    implementation(libs.org.flywaydb.flyway.core)
+    implementation(libs.org.flywaydb.flyway.database.postgresql)
+    implementation(libs.org.jetbrains.kotlin.kotlin.reflect)
+    implementation(libs.org.springframework.boot.spring.boot.starter.validation)
+    implementation(libs.org.springdoc.springdoc.openapi.starter.webflux.api)
+    implementation(libs.org.springframework.boot.spring.boot.starter.webflux)
+    testImplementation(libs.org.testcontainers.junit.jupiter)
+    testImplementation(libs.org.springframework.boot.spring.boot.testcontainers)
+    testImplementation(libs.org.testcontainers.postgresql)
+    testImplementation(libs.io.projectreactor.reactor.test)
+    developmentOnly(libs.org.springframework.boot.spring.boot.docker.compose)
+    runtimeOnly(libs.org.postgresql.postgresql)
+    runtimeOnly(libs.org.postgresql.r2dbc.postgresql)
+    runtimeOnly(libs.io.r2dbc.r2dbc.pool)
+    testImplementation(libs.org.springframework.boot.spring.boot.starter.test)
+    jooqCodegen(libs.org.postgresql.postgresql)
+    jooqCodegen(libs.org.jooq.jooq)
+    jooqCodegen(libs.org.jooq.jooq.meta)
+    jooqCodegen(libs.org.jooq.jooq.codegen)
+    jooqCodegen(libs.co.uzzu.dotenv.gradle)
+    testImplementation(libs.org.jetbrains.kotlin.kotlin.test)
+    testImplementation(libs.org.mockito.kotlin.mockito.kotlin)
+    implementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.core)
+    testImplementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.test)
+    testImplementation(libs.io.mockk.mockk)
 }
 
-apply plugin: "co.uzzu.dotenv.gradle"
-
-tasks.withType(KotlinCompile).configureEach {
+kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xjsr305=strict")
         jvmTarget = JvmTarget.JVM_21
     }
 }
 
-tasks.named("test") {
+tasks.test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
+    extensions.configure(JacocoTaskExtension::class) {
+        excludes = listOf("**/api/*", "**/db/**")
+    }
+    finalizedBy(tasks.jacocoTestReport)
 }
 
-jacocoTestReport {
-    dependsOn test
-
-    classDirectories.setFrom(classDirectories.files.collect {
-        fileTree(dir: it, excludes: ["**/api/*", "**/db/**"])
-    })
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
 }
 
 jooq {
@@ -140,29 +141,29 @@ jooq {
             // Generation flags: See advanced configuration properties
             generate {
                 // Tell the KotlinGenerator to generate properties in addition to methods for these paths. Default is true.
-                implicitJoinPathsAsKotlinProperties = true
+                isImplicitJoinPathsAsKotlinProperties = true
 
                 // Workaround for Kotlin generating setX() setters instead of setIsX() in byte code for mutable properties called
                 // <code>isX</code>. Default is true.
-                kotlinSetterJvmNameAnnotationsOnIsPrefix = true
+                isKotlinSetterJvmNameAnnotationsOnIsPrefix = true
 
                 // Generate POJOs as data classes, when using the KotlinGenerator. Default is true.
-                pojosAsKotlinDataClasses = true
+                isPojosAsKotlinDataClasses = true
 
                 // Generate non-nullable types on POJO attributes, where column is not null. Default is false.
-                kotlinNotNullPojoAttributes = true
+                isKotlinNotNullPojoAttributes = true
 
                 // Generate non-nullable types on Record attributes, where column is not null. Default is false.
-                kotlinNotNullRecordAttributes = true
+                isKotlinNotNullRecordAttributes = true
 
                 // Generate non-nullable types on interface attributes, where column is not null. Default is false.
-                kotlinNotNullInterfaceAttributes = true
+                isKotlinNotNullInterfaceAttributes = true
 
                 // Generate defaulted nullable POJO attributes. Default is true.
-                kotlinDefaultedNullablePojoAttributes = false
+                isKotlinDefaultedNullablePojoAttributes = false
 
                 // Generate defaulted nullable Record attributes. Default is true.
-                kotlinDefaultedNullableRecordAttributes = false
+                isKotlinDefaultedNullableRecordAttributes = false
 
 //                // Generate the DAO classes
 //                daos = true
@@ -185,9 +186,18 @@ jooq {
                 packageName = "com.example.bookmanagement.db.jooq.gen"
 
                 // The destination directory of your generated classes
-                //directory = "src/main/kotlin"
+                // directory = "src/main/kotlin"
             }
         }
+    }
+}
+
+tasks {
+    withType<AbstractFlywayTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/flyway/flyway/issues/3550")
+    }
+    withType<CodegenTask> {
+        notCompatibleWithConfigurationCache("because https://github.com/jOOQ/jOOQ/issues/16997")
     }
 }
 
@@ -198,11 +208,12 @@ flyway {
 }
 
 ktlint {
+    version.set(libs.versions.ktlint)
     filter {
         exclude { element ->
             element.file.path.contains("generated")
         }
-        //exclude("**/generated-sources/**")
+        // exclude("**/generated-sources/**")
         include("**/kotlin/**")
     }
 }
@@ -210,14 +221,21 @@ ktlint {
 openApiGenerate {
     generatorName.set("kotlin-spring")
     inputSpec.set("$rootDir/bookmanagement.yaml")
-    outputDir.set(layout.buildDirectory.dir("generated-sources/api").get().toString())
+    outputDir.set(
+        layout.buildDirectory
+            .dir("generated-sources/api")
+            .get()
+            .toString(),
+    )
     apiPackage.set("com.example.bookmanagement.api")
     invokerPackage.set("com.example.bookmanagement.api.invoker")
     modelPackage.set("com.example.bookmanagement.api.model")
-    configOptions.set([
-        dateLibrary: "java8" ,
-        useSpringBoot3: "true",
-        interfaceOnly: "true",
-        reactive: "true",
-    ])
+    configOptions.set(
+        mapOf(
+            "dateLibrary" to "java8",
+            "useSpringBoot3" to "true",
+            "interfaceOnly" to "true",
+            "reactive" to "true",
+        ),
+    )
 }

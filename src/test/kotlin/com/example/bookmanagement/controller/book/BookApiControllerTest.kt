@@ -13,8 +13,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.reactive.server.WebTestClient
 import java.time.LocalDate
 import kotlin.test.Test
@@ -27,7 +27,7 @@ class BookApiControllerTest {
     @Autowired
     private lateinit var mapper: ObjectMapper
 
-    @MockBean
+    @MockitoBean
     private lateinit var bookService: BookService
 
     @Test
@@ -38,12 +38,14 @@ class BookApiControllerTest {
             val request = CreateBookRequest(2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.post()
+            webTestClient
+                .post()
                 .uri("/books")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json("""{ "id" : 1 }""")
 
@@ -58,13 +60,16 @@ class BookApiControllerTest {
             val request = CreateBookRequest(2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.post()
+            webTestClient
+                .post()
                 .uri("/books")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk()
-                .expectBody().isEmpty
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .isEmpty
 
             verify(bookService, times(1)).create("1234567890", 2, "こころ")
         }
@@ -77,12 +82,14 @@ class BookApiControllerTest {
             val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.patch()
+            webTestClient
+                .patch()
                 .uri("/books")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json("""{ "id" : 1 }""")
 
@@ -97,13 +104,16 @@ class BookApiControllerTest {
             val request = UpdateBookRequest(1, 2, "こころ", "1234567890")
             val json = mapper.writeValueAsString(request)
 
-            webTestClient.patch()
+            webTestClient
+                .patch()
                 .uri("/books")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isOk
-                .expectBody().isEmpty
+                .expectStatus()
+                .isOk
+                .expectBody()
+                .isEmpty
 
             verify(bookService, times(1)).update(1, "1234567890", 2, "こころ")
         }
@@ -118,10 +128,12 @@ class BookApiControllerTest {
                 ),
             )
 
-            webTestClient.get()
+            webTestClient
+                .get()
                 .uri("/books?bookTitle=こころ&isbn=1234567890&authorName=夏目　漱石")
                 .exchange()
-                .expectStatus().isOk
+                .expectStatus()
+                .isOk
                 .expectBody()
                 .json(
                     """

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component
 import kotlin.coroutines.coroutineContext
 
 @Component
-class TransactionCoroutineOperator(private val dslContext: DSLContext) {
+class TransactionCoroutineOperator(
+    private val dslContext: DSLContext,
+) {
     suspend fun <T> execute(block: suspend CoroutineScope.() -> T): T {
         val propagatedDSLContext = coroutineContext.getDSLContext()
         return if (propagatedDSLContext != null) {

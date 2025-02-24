@@ -10,4 +10,9 @@ import java.time.LocalDate
  * @param birthday 誕生日
  * @param books 著者の書籍
  */
-data class Author(val id: Int, val name: String, val birthday: LocalDate?, val books: List<AuthorBook>)
+data class Author(
+    val id: Int,
+    val name: String,
+    val birthday: LocalDate?,
+    val books: List<AuthorBook>,
+)

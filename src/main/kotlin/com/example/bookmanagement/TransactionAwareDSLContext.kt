@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component
 import kotlin.coroutines.coroutineContext
 
 @Component
-class TransactionAwareDSLContext(private val dslContext: DSLContext) {
+class TransactionAwareDSLContext(
+    private val dslContext: DSLContext,
+) {
     suspend fun get(): DSLContext = coroutineContext.getDSLContext() ?: this.dslContext
 }
