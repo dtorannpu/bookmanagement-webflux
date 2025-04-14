@@ -13,7 +13,7 @@ org-springdoc-springdoc-openapi-starter-webflux-api = "2.8.6"
 io-r2dbc-r2dbc-pool = "1.0.2.RELEASE"
 org-mockito-kotlin-mockito-kotlin = "5.4.0"
 org-jetbrains-kotlinx-kotlinx-coroutines-core = "1.10.2"
-org-jetbrains-kotlinx-kotlinx-coroutines-test = "1.10.1"
+org-jetbrains-kotlinx-kotlinx-coroutines-test = "1.10.2"
 io-mockk-mockk = "1.14.0"
 
 [libraries]
