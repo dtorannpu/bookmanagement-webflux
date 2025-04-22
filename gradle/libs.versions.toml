@@ -33,7 +33,7 @@ org-jetbrains-kotlinx-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx
 org-jetbrains-kotlinx-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "org-jetbrains-kotlinx-kotlinx-coroutines-test" }
 io-mockk-mockk = { group = "io.mockk", name = "mockk", version.ref = "io-mockk-mockk" }
 com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
-org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 org-springframework-boot-spring-boot-starter-webflux = { group = "org.springframework.boot", name = "spring-boot-starter-webflux" }
