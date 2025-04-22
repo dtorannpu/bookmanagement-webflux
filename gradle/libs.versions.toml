@@ -8,13 +8,14 @@ org-jetbrains-kotlin-plugin-spring = "2.1.20"
 org-jlleitschuh-gradle-ktlint = "12.2.0"
 co-uzzu-dotenv-gradle = "4.0.0"
 org-openapi-generator = "7.12.0"
-flyway = "11.4.0"
+flyway = "11.7.2"
 org-springdoc-springdoc-openapi-starter-webflux-api = "2.8.6"
 io-r2dbc-r2dbc-pool = "1.0.2.RELEASE"
 org-mockito-kotlin-mockito-kotlin = "5.4.0"
 org-jetbrains-kotlinx-kotlinx-coroutines-core = "1.10.2"
 org-jetbrains-kotlinx-kotlinx-coroutines-test = "1.10.2"
 io-mockk-mockk = "1.14.0"
+org-postgresql-postgresql = "42.7.5"
 
 [libraries]
 org-flywaydb-flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
@@ -32,7 +33,7 @@ org-jetbrains-kotlinx-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx
 org-jetbrains-kotlinx-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "org-jetbrains-kotlinx-kotlinx-coroutines-test" }
 io-mockk-mockk = { group = "io.mockk", name = "mockk", version.ref = "io-mockk-mockk" }
 com-fasterxml-jackson-module-jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
-org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 org-springframework-boot-spring-boot-starter-webflux = { group = "org.springframework.boot", name = "spring-boot-starter-webflux" }
@@ -41,7 +42,7 @@ org-springframework-boot-spring-boot-testcontainers = { group = "org.springframe
 org-testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
 io-projectreactor-reactor-test = { group = "io.projectreactor", name = "reactor-test" }
 org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
-org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql" }
+org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql", version.ref="org-postgresql-postgresql" }
 org-postgresql-r2dbc-postgresql = { group = "org.postgresql", name = "r2dbc-postgresql" }
 org-springframework-boot-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
