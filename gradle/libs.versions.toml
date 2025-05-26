@@ -1,7 +1,7 @@
 [versions]
 ktlint = "1.5.0"
 jooq = "3.20.4"
-org-springframework-boot = "3.4.5"
+org-springframework-boot = "3.5.0"
 io-spring-dependency-management = "1.1.7"
 org-jetbrains-kotlin-jvm = "2.1.21"
 org-jetbrains-kotlin-plugin-spring = "2.1.21"
