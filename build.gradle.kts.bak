@@ -78,7 +78,7 @@ dependencies {
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
+        freeCompilerArgs.add("-Xjsr305=strict")
         jvmTarget.set(JvmTarget.fromTarget(javaVersion))
     }
 }
@@ -142,7 +142,6 @@ jooq {
             // Generation flags: See advanced configuration properties
             generate {
                 // Tell the KotlinGenerator to generate properties in addition to methods for these paths. Default is true.
-
                 isImplicitJoinPathsAsKotlinProperties = true
 
                 // Workaround for Kotlin generating setX() setters instead of setIsX() in byte code for mutable properties called
@@ -167,15 +166,15 @@ jooq {
                 // Generate defaulted nullable Record attributes. Default is true.
                 isKotlinDefaultedNullableRecordAttributes = false
 
-                //                // Generate the DAO classes
-                //                daos = true
-                //
-                //                // Annotate DAOs (and other types) with spring annotations, such as @Repository and @Autowired
-                //                // for auto-wiring the Configuration instance, e.g. from Spring Boot's jOOQ starter
-                //                springAnnotations = true
-                //
-                //                // Generate Spring-specific DAOs containing @Transactional annotations
-                //                springDao = true
+//                // Generate the DAO classes
+//                daos = true
+//
+//                // Annotate DAOs (and other types) with spring annotations, such as @Repository and @Autowired
+//                // for auto-wiring the Configuration instance, e.g. from Spring Boot's jOOQ starter
+//                springAnnotations = true
+//
+//                // Generate Spring-specific DAOs containing @Transactional annotations
+//                springDao = true
             }
             target {
 
@@ -212,17 +211,14 @@ ktlint {
         exclude { element ->
             element.file.path.contains("generated")
         }
+        // exclude("**/generated-sources/**")
         include("**/kotlin/**")
     }
 }
 
-tasks.named("openApiGenerate") {
-    dependsOn("compileTypeSpec")
-}
-
 openApiGenerate {
     generatorName.set("kotlin-spring")
-    inputSpec.set("$rootDir/tsp-output/schema/openapi.yaml")
+    inputSpec.set("$rootDir/bookmanagement.yaml")
     outputDir.set(
         layout.buildDirectory
             .dir("generated-sources/api")
@@ -240,43 +236,4 @@ openApiGenerate {
             "reactive" to "true",
         ),
     )
-}
-
-tasks.register<Exec>("tspExists") {
-    group = "typespec"
-    description = "Checks if TypeSpec is installed"
-    if (System.getProperty("os.name").lowercase().contains("windows")) {
-        commandLine("cmd.exe", "/d", "/c", "tsp", "--version")
-    } else {
-        commandLine("tsp", "--version")
-    }
-    isIgnoreExitValue = true
-
-    doLast {
-        if (executionResult.get().exitValue == 0) {
-            println("TypeSpec is installed")
-        } else {
-            throw GradleException("TypeSpec is not installed. Run: npm install -g @typespec/compiler @typespec/openapi3")
-        }
-    }
-}
-
-tasks.register<Exec>("compileTypeSpec") {
-    group = "typespec"
-    description = "Compiles TypeSpec to OpenAPI"
-    if (System.getProperty("os.name").lowercase().contains("windows")) {
-        commandLine("cmd.exe", "/d", "/c", "tsp", "compile", "specs/main.tsp")
-    } else {
-        commandLine("tsp", "compile", "specs/main.tsp")
-    }
-
-    inputs.files(
-        fileTree("specs") {
-            include("**/*.tsp")
-        },
-    )
-
-    outputs.dir("tsp-output")
-
-    dependsOn("tspExists")
 }
