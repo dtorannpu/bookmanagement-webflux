@@ -14,7 +14,7 @@ io-r2dbc-r2dbc-pool = "1.0.2.RELEASE"
 org-mockito-kotlin-mockito-kotlin = "6.1.0"
 org-jetbrains-kotlinx-kotlinx-coroutines-core = "1.10.2"
 org-jetbrains-kotlinx-kotlinx-coroutines-test = "1.10.2"
-io-mockk-mockk = "1.14.5"
+io-mockk-mockk = "1.14.6"
 org-postgresql-postgresql = "42.7.8"
 
 [libraries]
