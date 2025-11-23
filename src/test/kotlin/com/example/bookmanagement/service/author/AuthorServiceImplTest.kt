@@ -8,13 +8,13 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.spyk
-import junit.framework.TestCase.assertNotNull
 import kotlinx.coroutines.test.runTest
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import org.jooq.tools.jdbc.MockConnection
 import org.jooq.tools.jdbc.MockDataProvider
+import org.junit.jupiter.api.Assertions.assertNotNull
 import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
