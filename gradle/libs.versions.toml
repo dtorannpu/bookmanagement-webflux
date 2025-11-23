@@ -1,7 +1,7 @@
 [versions]
 ktlint = "1.5.0"
 jooq = "3.20.8"
-org-springframework-boot = "3.5.7"
+org-springframework-boot = "4.0.0"
 io-spring-dependency-management = "1.1.7"
 org-jetbrains-kotlin-jvm = "2.2.21"
 org-jetbrains-kotlin-plugin-spring = "2.2.21"
@@ -20,6 +20,7 @@ org-postgresql-postgresql = "42.7.8"
 [libraries]
 org-flywaydb-flyway-database-postgresql = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
 org-springframework-boot-spring-boot-starter-jooq = { group = "org.springframework.boot", name = "spring-boot-starter-jooq" }
+org-springframework-boot-spring-boot-starter-jooq-test = { group = "org.springframework.boot", name = "spring-boot-starter-jooq-test" }
 org-jooq-jooq = { group = "org.jooq", name = "jooq", version.ref = "jooq" }
 org-jooq-jooq-kotlin = { group = "org.jooq", name = "jooq-kotlin", version.ref = "jooq" }
 org-jooq-jooq-kotlin-coroutines = { group = "org.jooq", name = "jooq-kotlin-coroutines", version.ref = "jooq" }
@@ -37,15 +38,17 @@ org-flywaydb-flyway-core = { group = "org.flywaydb", name = "flyway-core", versi
 org-jetbrains-kotlin-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 org-springframework-boot-spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 org-springframework-boot-spring-boot-starter-webflux = { group = "org.springframework.boot", name = "spring-boot-starter-webflux" }
-org-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
+org-springframework-boot-spring-boot-starter-webflux-test = { group = "org.springframework.boot", name = "spring-boot-starter-webflux-test" }
+org-testcontainers-testcontainers-junit-jupiter = { group = "org.testcontainers", name = "testcontainers-junit-jupiter" }
 org-springframework-boot-spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
-org-testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql" }
+org-testcontainers-testcontainers-postgresql = { group = "org.testcontainers", name = "testcontainers-postgresql" }
 io-projectreactor-reactor-test = { group = "io.projectreactor", name = "reactor-test" }
 org-springframework-boot-spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
-org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql", version.ref="org-postgresql-postgresql" }
+org-postgresql-postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "org-postgresql-postgresql" }
 org-postgresql-r2dbc-postgresql = { group = "org.postgresql", name = "r2dbc-postgresql" }
 org-springframework-boot-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 org-jetbrains-kotlin-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
+org-springframework-boot-spring-boot-r2dbc = { group = "org.springframework.boot", name = "spring-boot-r2dbc" }
 
 [plugins]
 org-jooq-jooq-codegen-gradle = { id = "org.jooq.jooq-codegen-gradle", version.ref = "jooq" }

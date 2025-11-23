@@ -5,17 +5,17 @@ import com.example.bookmanagement.api.model.UpdateAuthorRequest
 import com.example.bookmanagement.model.Author
 import com.example.bookmanagement.model.AuthorBook
 import com.example.bookmanagement.service.author.AuthorService
-import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.test.runTest
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
+import org.springframework.boot.webflux.test.autoconfigure.WebFluxTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.reactive.server.WebTestClient
+import tools.jackson.databind.json.JsonMapper
 import java.time.LocalDate
 import kotlin.test.Test
 
@@ -25,7 +25,7 @@ class AuthorApiControllerTest {
     private lateinit var webTestClient: WebTestClient
 
     @Autowired
-    private lateinit var mapper: ObjectMapper
+    private lateinit var mapper: JsonMapper
 
     @MockitoBean
     private lateinit var authorService: AuthorService
