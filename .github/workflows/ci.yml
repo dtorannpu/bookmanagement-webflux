@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         distribution: ["temurin"]
-        java-version: ["21", "24"]
+        java-version: ["25"]
     steps:
       - name: Checkout code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
