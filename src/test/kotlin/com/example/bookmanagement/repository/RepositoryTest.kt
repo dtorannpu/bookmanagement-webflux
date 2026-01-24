@@ -8,7 +8,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer
 
 abstract class RepositoryTest {
     companion object {
-        private val db = PostgreSQLContainer("postgres:17.6")
+        private val db = PostgreSQLContainer("postgres:18.1")
 
         init {
             db.start()
