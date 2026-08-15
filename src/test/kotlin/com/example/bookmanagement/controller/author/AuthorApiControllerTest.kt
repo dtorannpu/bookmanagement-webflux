@@ -130,7 +130,6 @@ class AuthorApiControllerTest {
                             },
                             {
                                 "id": 2,
-                                "isbn": null,
                                 "title": "吾輩は猫である"
                             }
                         ]
@@ -158,7 +157,6 @@ class AuthorApiControllerTest {
                     {
                         "id": 1,
                         "name": "夏目　漱石",
-                        "birthday": null,
                         "books": []
                     }
                     """.trimIndent(),
