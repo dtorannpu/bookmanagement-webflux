@@ -179,8 +179,8 @@ importers:
         specifier: 1.17.0
         version: 1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0)))
       '@typespec/rest':
-        specifier: 0.87.0
-        version: 0.87.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))
+        specifier: 0.88.0
+        version: 0.88.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))
 
 packages:
 
@@ -362,12 +362,12 @@ packages:
       '@typespec/compiler': ^1.17.0
       '@typespec/http': ^1.17.0
 
-  '@typespec/rest@0.87.0':
-    resolution: {integrity: sha512-Oi47F6IJWyP/efMXf+OUwJTKRrfPpsXPzFZIxG5x2HpAgTwQ0xAUPkrQ6XoQ4rdmwN3XPm0nV54lw5GKljB9LQ==}
+  '@typespec/rest@0.88.0':
+    resolution: {integrity: sha512-xWJ+bZ5AEe+PGrzyjqBamaBqpgdCHDygJIPX9HP9NAFfwPoompuMV1WqohDEkH7htFs06vECWQ+UeX8cU5bcwg==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
-      '@typespec/compiler': ^1.17.0
-      '@typespec/http': ^1.17.0
+      '@typespec/compiler': ^1.18.0
+      '@typespec/http': ^1.18.0
 
   ajv-draft-04@1.0.0:
     resolution: {integrity: sha512-mv00Te6nmYbRp5DCwclxtt7yV/joXJPGS7nM+97GdxvuttCOfgI3K4U25zboyeX0O+myI8ERluxQe5wljMmVIw==}
@@ -759,7 +759,7 @@ snapshots:
       '@typespec/compiler': 1.17.0
       '@typespec/http': 1.17.0(@typespec/compiler@1.17.0)
 
-  '@typespec/rest@0.87.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))':
+  '@typespec/rest@0.88.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))':
     dependencies:
       '@typespec/compiler': 1.17.0
       '@typespec/http': 1.17.0(@typespec/compiler@1.17.0)
