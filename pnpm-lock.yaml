@@ -176,8 +176,8 @@ importers:
         specifier: 1.17.0
         version: 1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))
       '@typespec/openapi3':
-        specifier: 1.17.0
-        version: 1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0)))
+        specifier: 1.18.0
+        version: 1.18.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0)))
       '@typespec/rest':
         specifier: 0.87.0
         version: 0.87.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))
@@ -258,52 +258,48 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@scalar/helpers@0.11.3':
-    resolution: {integrity: sha512-4zPzuNTXObDUtZS93xzAoK83ddHDgBGifv/vKFe6bHqEl5i+IMLTTtEHOaaOZK4dusPEXcXsU5TBSaY/I6Mi+A==}
+  '@scalar/helpers@0.16.4':
+    resolution: {integrity: sha512-9eILWzUcAkHEuYMMvijpSIy69t+Vkq+NudLB/7lgARFTWqXfQpIxW1L3VH7ogKyRie5+E4CNZ3PSvlw6IIfLGw==}
     engines: {node: '>=22'}
 
-  '@scalar/helpers@0.12.0':
-    resolution: {integrity: sha512-rcX0rFLiWWc0VBr/E+HkatubL0I0ZzxASQkd3032NWEMAEfNd2TiJ9kH46HwbSAOOl696ghxymWegjpjjvxwzA==}
+  '@scalar/helpers@0.18.0':
+    resolution: {integrity: sha512-uvOhlUbqvnJNjvnsSr2CwZLQgT1qW3ZIBd11Ntg/DHL3nswVAE8f9OppcYWG4LLH0c7nxY+CPvDbmwqlp0rlrA==}
     engines: {node: '>=22'}
 
-  '@scalar/helpers@0.16.2':
-    resolution: {integrity: sha512-jHSF4KZI/EcVI7WhhgNyw9vvuVCXmwP4rkMXwcaZJjMg1tFPHSOWqIcq123CsUwCMR34SEBAGSJR+Eskrz+7Qg==}
+  '@scalar/json-magic@0.17.0':
+    resolution: {integrity: sha512-YmJAO9NoGCcU/vx7P4Dy9DGv+Vntp+ny3Fh99slHOOh/IZxvbdK5hWeZdzQ3x+ezab9XJNscFoX8H/P6W+H8lA==}
+    engines: {node: '>=22.19.0'}
+
+  '@scalar/json-magic@0.19.1':
+    resolution: {integrity: sha512-k1v1dIjCSSUf3MYFFJbaRfZXtguFqCf1JmDSGT4oE2xVvDDZnTMm/Q+rKP/ipom7wUTUwO86HujkeASwnNQeBQ==}
+    engines: {node: '>=22.19.0'}
+
+  '@scalar/json-schema-validator@0.1.20':
+    resolution: {integrity: sha512-eNuCxQ56VXNeXqJsV/0RlJ+SyqL0gtCQb8vRtcKFVaIRPWRnrNJ9+jHEMtjFAGIWTS199XiKz+L3Qg+6EV3hSg==}
     engines: {node: '>=22'}
 
-  '@scalar/json-magic@0.13.5':
-    resolution: {integrity: sha512-w5eENfKAkc4CYiLva3nGUhTaJfyi3szmZ3E7+EHlzahOUnbDmB9rAWyzt8GFCXbwxeTuR+1m7lO1PyV/QAid4A==}
+  '@scalar/openapi-parser@0.29.22':
+    resolution: {integrity: sha512-EH6PIAOAtlTbhvwrV07IaLsF2zdc3nPmOkbF41NrjomrZ7M3UKSM6l9MhzEPK0GABzkislztK6ILs7/XD6HhUA==}
     engines: {node: '>=22'}
 
-  '@scalar/json-magic@0.15.6':
-    resolution: {integrity: sha512-rMCnkOtEnSolwHMFiOC4e97GBFfKOt3/4ba2Z4juVLTL0vCHs+Ei04Ofj5NBZUxOzjz1Ok2NqOt6ad0gIjpe7g==}
+  '@scalar/openapi-types@0.9.9':
+    resolution: {integrity: sha512-Z2NfKMNhtWJaEiYVU1pzVS+BT53ygotVA6y9reCx0jTcwqml9WPrNPumgjlgoZnBdP9pZU3+u86RNwwVAyArvA==}
     engines: {node: '>=22'}
 
-  '@scalar/json-schema-validator@0.1.11':
-    resolution: {integrity: sha512-FypuPVngLTO/E5OjhOD2OgjigfjTV35oy3/VBHRz6p5ObwLL5Z3/AYCpNg0dpaNkDFqBd7qAsqS93X87q3fibw==}
+  '@scalar/openapi-upgrader@0.4.9':
+    resolution: {integrity: sha512-az/XJuOozvwOqu3LQN6fFkepuh+YizCWLHhi3F87CJVogPb/0u6MUl8pY6BE45+vjD4/pZb5BDc1rCXTEthsKQ==}
     engines: {node: '>=22'}
 
-  '@scalar/openapi-parser@0.29.12':
-    resolution: {integrity: sha512-VxSg9mrhHA+Tq0Z6DBOvNDQ0m30kpw/hevHfBxXFEINwzz3qrleGm6DaBvdNl5RBtKMC/GGcRUZKSsJrQHgEXA==}
+  '@scalar/openapi-validator@0.1.20':
+    resolution: {integrity: sha512-7NQc+/ZJsqcJBFxExTu/oq1vfcDSaScdBZ2x794wCWVNuGh6zyUTyp1JeMue/QGBWhEt0KVywvspFzI8zQRS4Q==}
     engines: {node: '>=22'}
 
-  '@scalar/openapi-types@0.9.7':
-    resolution: {integrity: sha512-UVSgxRxcTaIbTZGtNRdQJHZC60uyYi29zfDqQVp0lxx07BNczIHbf9jycgI/+W3Uxxod+yUUt7hzxnKllOHE0w==}
+  '@scalar/types@0.25.2':
+    resolution: {integrity: sha512-3QGFX9DOvk8jAEPOcwCEbkLpagFvvjoeuUCTUyYUlsu1Mf5itUaw+RL4mfD3Udbqk9xfVTSlkm2Xa357vwWlxw==}
     engines: {node: '>=22'}
 
-  '@scalar/openapi-upgrader@0.4.3':
-    resolution: {integrity: sha512-EaFh3mtJweVhlXGEae+lpGdX0daHAce/hgRg0Vg+HtQkZ45oujHY7+lqLNRFKDw90gJZyzfOukOjTZTcYp5t0w==}
-    engines: {node: '>=22'}
-
-  '@scalar/openapi-validator@0.1.11':
-    resolution: {integrity: sha512-xqdSNIOBqG67+Pde0WQv3QZ0cCr3kmNu7lfp1UzOVV34RtN0AW8F1oFQSITe73EbOMcAGIpe15ekrFvhRrCvcA==}
-    engines: {node: '>=22'}
-
-  '@scalar/types@0.19.0':
-    resolution: {integrity: sha512-EKeoWgUlP+uepbM/zEHKbsdpBNyOmSrw6DdU/WC0p53gz5uRzI7d/IEecIP9SQMUkResPR9DmWeWfFQftG7vqg==}
-    engines: {node: '>=22'}
-
-  '@scalar/types@0.23.1':
-    resolution: {integrity: sha512-AzExo7alI8gqLduVZNBW+4u4FpLPW2AkD/2OMEmr3LgcCbDRobRBDKFZ07A8+vemonJCLKxkq88yCx0cAw28vw==}
+  '@scalar/types@0.28.1':
+    resolution: {integrity: sha512-HINEN1cHeYBnMjFGoMDrLEn7L4qdd7H6VjgeVUKno538iyJ+1N4oncRhYep41Aa2SlWNZaI44zUbBtPIWCRG2g==}
     engines: {node: '>=22'}
 
   '@typespec/asset-emitter@0.79.3':
@@ -327,19 +323,19 @@ packages:
       '@typespec/streams':
         optional: true
 
-  '@typespec/openapi3@1.17.0':
-    resolution: {integrity: sha512-BC5zSemNfyFWIgJOj0TrwVA3KULIvCmlrDhqESMbzmN4h3byhXR/PENxPP4TlPKfu3M1KE44esnxSDQ5Py3WnA==}
+  '@typespec/openapi3@1.18.0':
+    resolution: {integrity: sha512-eUgFB9bViCYu/NVW+m0JPUssWC0EloA+JEELyvbegNfIBmpH16oe+jYw0H6/UFy/KvaxAfAdmY3IrZMv0EujQA==}
     engines: {node: '>=22.0.0'}
     hasBin: true
     peerDependencies:
-      '@typespec/compiler': ^1.17.0
-      '@typespec/events': ^0.87.0
-      '@typespec/http': ^1.17.0
-      '@typespec/json-schema': ^1.17.0
-      '@typespec/openapi': ^1.17.0
-      '@typespec/sse': ^0.87.0
-      '@typespec/streams': ^0.87.0
-      '@typespec/versioning': ^0.87.0
+      '@typespec/compiler': ^1.18.0
+      '@typespec/events': ^0.88.0
+      '@typespec/http': ^1.18.0
+      '@typespec/json-schema': ^1.18.0
+      '@typespec/openapi': ^1.18.0
+      '@typespec/sse': ^0.88.0
+      '@typespec/streams': ^0.88.0
+      '@typespec/versioning': ^0.88.0
       '@typespec/xml': '*'
     peerDependenciesMeta:
       '@typespec/events':
@@ -537,13 +533,9 @@ packages:
     resolution: {integrity: sha512-NoSdpq/WEiAg5sjmBkmV/hfxv6HJH4NqPNrqjtSO5CwRmpsDfaf4begxW34KdJykH/l1yHtwBWQkCRdoXO8mPA==}
     engines: {node: '>=20'}
 
-  undici@7.24.4:
-    resolution: {integrity: sha512-BM/JzwwaRXxrLdElV2Uo6cTLEjhSb3WXboncJamZ15NgUURmvlXvxa6xkwIOILIjPNo9i8ku136ZvWV0Uly8+w==}
-    engines: {node: '>=20.18.1'}
-
-  undici@7.29.1:
-    resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
-    engines: {node: '>=20.18.1'}
+  undici@8.12.3:
+    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
+    engines: {node: '>=22.19.0'}
 
   vscode-jsonrpc@9.0.3:
     resolution: {integrity: sha512-qETYf9PCl1lVfwR+oBmMfc4vP2nqLNA35ABxorw3j06+xlKRgDVxbLgKm4Y/xPL0YWdeDjLoI4ImICIT3nB0zQ==}
@@ -587,8 +579,8 @@ packages:
     resolution: {integrity: sha512-9OpKOLeaoNFecEp7P6iYbzze/5CqWoH7N3SMs/6y1XF4nMvFMspEGZzJ6uFi9MmQwXhyzqYoSEKO3tvA3Z/o2w==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
-  zod@4.6.6:
-    resolution: {integrity: sha512-4UmzQUF5fxvfcYHlbjBmejU+w+hbDnWFx4aS8kBx7nPBHcO2SqPbpAG8snbdg+Xse4pRefR98hgjFgIMCI/UhA==}
+  zod@4.6.7:
+    resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
 snapshots:
 
@@ -643,72 +635,70 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@scalar/helpers@0.11.3': {}
+  '@scalar/helpers@0.16.4': {}
 
-  '@scalar/helpers@0.12.0': {}
+  '@scalar/helpers@0.18.0': {}
 
-  '@scalar/helpers@0.16.2': {}
-
-  '@scalar/json-magic@0.13.5':
+  '@scalar/json-magic@0.17.0':
     dependencies:
-      '@scalar/helpers': 0.12.0
+      '@scalar/helpers': 0.16.4
       pathe: 2.0.3
-      undici: 7.24.4
+      undici: 8.12.3
       yaml: 2.9.1
 
-  '@scalar/json-magic@0.15.6':
+  '@scalar/json-magic@0.19.1':
     dependencies:
-      '@scalar/helpers': 0.16.2
+      '@scalar/helpers': 0.18.0
       pathe: 2.0.3
-      undici: 7.29.1
+      undici: 8.12.3
       yaml: 2.9.1
 
-  '@scalar/json-schema-validator@0.1.11':
+  '@scalar/json-schema-validator@0.1.20':
     dependencies:
-      '@scalar/helpers': 0.16.2
-      '@scalar/types': 0.23.1
+      '@scalar/helpers': 0.18.0
+      '@scalar/types': 0.28.1
       ajv: 8.20.0
       ajv-draft-04: 1.0.0(ajv@8.20.0)
       ajv-formats: 3.0.1
       yaml: 2.9.1
 
-  '@scalar/openapi-parser@0.29.12':
+  '@scalar/openapi-parser@0.29.22':
     dependencies:
-      '@scalar/helpers': 0.16.2
-      '@scalar/json-magic': 0.15.6
-      '@scalar/openapi-types': 0.9.7
-      '@scalar/openapi-upgrader': 0.4.3
-      '@scalar/openapi-validator': 0.1.11
-      '@scalar/types': 0.23.1
+      '@scalar/helpers': 0.18.0
+      '@scalar/json-magic': 0.19.1
+      '@scalar/openapi-types': 0.9.9
+      '@scalar/openapi-upgrader': 0.4.9
+      '@scalar/openapi-validator': 0.1.20
+      '@scalar/types': 0.28.1
       yaml: 2.9.1
 
-  '@scalar/openapi-types@0.9.7': {}
+  '@scalar/openapi-types@0.9.9': {}
 
-  '@scalar/openapi-upgrader@0.4.3':
+  '@scalar/openapi-upgrader@0.4.9':
     dependencies:
-      '@scalar/helpers': 0.16.2
-      '@scalar/openapi-types': 0.9.7
+      '@scalar/helpers': 0.18.0
+      '@scalar/openapi-types': 0.9.9
 
-  '@scalar/openapi-validator@0.1.11':
+  '@scalar/openapi-validator@0.1.20':
     dependencies:
-      '@scalar/helpers': 0.16.2
-      '@scalar/json-schema-validator': 0.1.11
-      '@scalar/types': 0.23.1
+      '@scalar/helpers': 0.18.0
+      '@scalar/json-schema-validator': 0.1.20
+      '@scalar/types': 0.28.1
       yaml: 2.9.1
 
-  '@scalar/types@0.19.0':
+  '@scalar/types@0.25.2':
     dependencies:
-      '@scalar/helpers': 0.11.3
+      '@scalar/helpers': 0.16.4
       nanoid: 5.1.16
       type-fest: 5.10.0
-      zod: 4.6.6
+      zod: 4.6.7
 
-  '@scalar/types@0.23.1':
+  '@scalar/types@0.28.1':
     dependencies:
-      '@scalar/helpers': 0.16.2
+      '@scalar/helpers': 0.18.0
       nanoid: 5.1.16
       type-fest: 5.10.0
-      zod: 4.6.6
+      zod: 4.6.7
 
   '@typespec/asset-emitter@0.79.3(@typespec/compiler@1.17.0)':
     dependencies:
@@ -742,12 +732,12 @@ snapshots:
     dependencies:
       '@typespec/compiler': 1.17.0
 
-  '@typespec/openapi3@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0)))':
+  '@typespec/openapi3@1.18.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0))(@typespec/openapi@1.17.0(@typespec/compiler@1.17.0)(@typespec/http@1.17.0(@typespec/compiler@1.17.0)))':
     dependencies:
-      '@scalar/json-magic': 0.13.5
-      '@scalar/openapi-parser': 0.29.12
-      '@scalar/openapi-types': 0.9.7
-      '@scalar/types': 0.19.0
+      '@scalar/json-magic': 0.17.0
+      '@scalar/openapi-parser': 0.29.22
+      '@scalar/openapi-types': 0.9.9
+      '@scalar/types': 0.25.2
       '@typespec/asset-emitter': 0.79.3(@typespec/compiler@1.17.0)
       '@typespec/compiler': 1.17.0
       '@typespec/http': 1.17.0(@typespec/compiler@1.17.0)
@@ -891,9 +881,7 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  undici@7.24.4: {}
-
-  undici@7.29.1: {}
+  undici@8.12.3: {}
 
   vscode-jsonrpc@9.0.3: {}
 
@@ -933,4 +921,4 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 22.0.0
 
-  zod@4.6.6: {}
+  zod@4.6.7: {}
